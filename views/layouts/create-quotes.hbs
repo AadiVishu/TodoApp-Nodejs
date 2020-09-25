@@ -1,0 +1,153 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="fa fa-tasks" style="font-size:38px;color:#f1f1f1"></i>
+    </a>
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">@</span>
+        </div>
+        <input type="text" style="font-size:15px;font-weight:600" class="form-control" placeholder="search by title">
+      </div>
+    </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="btn btn-sm bg-warning text-dark p-2 m-1 nav-link" data-toggle="modal"
+            data-target="#createQuotes"><i class="fa fa-plus mr-1"></i><b>Quotes</b></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="btn btn-sm bg-success text-dark p-2 m-1 nav-link" href="/mytodos"><b>To-do list</b>
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class=" btn btn-sm bg-primary text-dark p-2 m-1 nav-link" href="/myprojects"><b>Prjects</b></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="text-light p-2 m-1 nav-link" href="#"><i class="fa fa-gears ml-2" style="font-size:22px"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- content headings -->
+<div class="conatiner text-center">
+  <h5 class="text-left pl-2 mt-2 text-success">My Quotes:/</h5>
+</div>
+<!-- main content -->
+<div class="container ">
+  <div class="row justify-content-center">
+   {{#each QuotesList}}
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-3 bg-warning m-1 quotesList"><br>
+      <lable class="quoteTitle"><b>{{this.quoteTitle}}</b></lable>
+      <i class="fa fa-gears m-1" style="float:right;"></i>
+      <a href="/deletequotes/{{this._id}}" onclick="return confirm('Are you sure want to delete this items?">
+        <i class="fa fa-trash m-1" style="float:right;"></i>
+      </a>
+      <a href="{{this._id}}" class="updateQuotes" data-toggle="modal" data-target="#updateMyquotes">
+        <i class="fa fa-edit m-1" style="float:right;"></i>
+      </a>
+      <small class="mydates">created on : {{this.dd}}-{{this.mm}}-{{this.yy}} </small>
+
+      <hr>
+      <div class="container">
+        <blockquote class="blockquote text-center">
+          <p class="mb-0 quoteContent">{{this.quoteContent}}</p>
+          <footer class="blockquote-footer text-end quoteSignature">{{this.quoteSignature}}</footer>
+        </blockquote>
+      </div>
+    </div>
+  {{/each}}
+ </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Modal for creating prjects -->
+<!-- The Modal -->
+<div class="modal fade" id="createQuotes">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="modal-title text-dark">Create Quotes:</h6>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <form action="/save_quotes" method="post">
+            <div class="form-group">
+              <input type="text" class="form-control" name="quoteTitle" placeholder="Title..." required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="quoteSignature" placeholder="Signature:" required>
+            </div>
+
+            <div class="form-group">
+              <textarea type="text" rows="3" class="form-control" name="quoteContent"
+                placeholder="Content..." required></textarea>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm bg-primary text-light"><b>Save</b></button>
+              <button type="button" class="btn btn-sm bg-danger text-light" data-dismiss="modal"><b>Cancele</b></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model for  edit  and update quotes -->
+<div class="modal fade" id="updateMyquotes">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="modal-title text-dark">Edit Quotes:</h6>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <form action="/updateQuote" method="post" id="updateMyquotes">
+          <input type="hidden" class="form-control" name="id" value="" required>
+            <div class="form-group">
+              <input type="text" class="form-control" name="quoteTitle" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="quoteSignature" required>
+            </div>
+
+            <div class="form-group">
+            <input type="textarea" class="form-control p-5" name="quoteContent">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm bg-primary text-light"><b>Update</b></button>
+              <button type="button" class="btn btn-sm bg-danger text-light" data-dismiss="modal"><b>Cancele</b></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

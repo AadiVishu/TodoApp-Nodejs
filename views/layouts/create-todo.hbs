@@ -1,0 +1,105 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="fa fa-tasks" style="font-size:38px;color:#f1f1f1"></i>
+    </a>
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">@</span>
+        </div>
+        <input type="text" style="font-size:15px;font-weight:600" class="form-control" placeholder="search by title">
+      </div>
+    </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="btn btn-sm bg-success text-dark p-2 m-1 nav-link" data-toggle="modal" data-target="#create-todo"><i
+              class="fa fa-plus mr-1"></i><b>To-do list</b>
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class=" btn btn-sm bg-primary text-dark p-2 m-1 nav-link" href="/myprojects"><b>Prjects</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-sm bg-warning text-dark p-2 m-1 nav-link" href="/myquotes"><b>Quotes</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="text-light p-2 m-1 nav-link" href="#"><i class="fa fa-gears ml-2" style="font-size:22px"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- content headings -->
+
+<div class="conatiner text-center">
+  <h5 class="text-left pl-2 mt-2 text-success">My Todolist:/</h5>
+</div>
+<!-- main content -->
+<div class="container">
+  <div class="div row justify-content-center">
+  <div class="alert alert-success" id="hideInfo">
+    <strong>Success!</strong> Hi! Dear, you are successfully logged-in!
+</div>
+</div>
+  {{#each todoList}}
+  <div class="row m-1 justify-content-center todoListBody">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-4 col-4 p-2 m-1 todoDefaultTheme bg-info">
+      <p class="pl-4 pr-4 pt-2 doneTaskContent">{{this.todoTask}}</p>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 pt-2 m-1 bg-dark">
+      <a class="doneTask">
+        <i class="btn btn-warning fa fa-check mt-2 ml-1"></i>
+      </a>
+      <a href="/deletetodo/{{this._id}}">
+        <i class="btn btn-danger fa fa-trash mt-2 ml-1"></i>
+      </a>
+      <a href="#">
+        <i class="btn btn-light fa fa-gears mt-2 ml-1"></i>
+      </a>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+
+
+
+
+<!-- Modal for creating to-do list -->
+<!-- The Modal -->
+<div class="modal fade" id="create-todo">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="modal-title text-dark">Create Todo:</h6>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <form action="/save_todolist" method="post" autocomplete="off">
+            <div class="form-group">
+              <input type="text" class="form-control" name="todoTask" placeholder="Add Task..." required>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm bg-primary text-light"><b>Save</b></button>
+              <button type="button" class="btn btn-sm bg-danger text-light" data-dismiss="modal"><b>Cancele</b></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
